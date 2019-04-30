@@ -1,1 +1,1 @@
-# Python-Minesweeper-CLI
+# Minesweeper CLI implemented in Python 3
