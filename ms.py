@@ -51,10 +51,10 @@ def calculateFieldNumbers():
 
 # Gets index values for row and column input values
 def translateToIndexValues(row, col):
-	rows = map(str, list(range(1, ROWS + 1)))
-	cols = list(string.ascii_uppercase[0:COLS])
+	rows = list(map(str, list(range(1, ROWS + 1))))
+	columnIndices = list(string.ascii_uppercase[0:COLS])
 
-	return rows.index(row), cols.index(col)
+	return rows.index(row), columnIndices.index(col)
 
 def sweep(row, col):
 	if field[row][col] == '💣':
@@ -165,9 +165,9 @@ def gameover():
 	exit()
 
 # Settings
-BOMBS = 40
-ROWS = 14
-COLS = 12
+BOMBS = 10
+ROWS = 8
+COLS = 8
 
 # Build field
 field = []
@@ -219,16 +219,18 @@ while True:
 			col = userInput[1:2]
 
 			if 'm' in userInput:
-				flag(translateToIndexValues(row, col))
+				pos = translateToIndexValues(row, col) # a tuple is returned
+				flag(pos[0], pos[1])
 
 			else: 
-				sweep(translateToIndexValues(row, col))
+				pos = translateToIndexValues(row, col)
+				sweep(pos[0], pos[1])
 
 		else: 
 			print('Invalid input.')
 			continue
 
-	# printField(knownField)
+	printField(knownField)
 
 	if checkWinCondition():
 		print('You won!')
